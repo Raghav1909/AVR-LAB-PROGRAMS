@@ -1,0 +1,16 @@
+// 3. Write a program to clear 15th, 13th and 10th bit, set the bits 8th, 3rd, 2nd and 1st, invert 6th bit.
+// After this, the 16-bit data is stored in pair of registers.
+
+LDI R16, $B5
+LDI R17, $52
+
+ANDI R16, $5B
+ANDI R17, $FF
+
+ORI R16, $01
+ORI R17, $0E
+
+LDI R18, $40
+EOR R17, R18
+
+LAST: RJMP LAST
