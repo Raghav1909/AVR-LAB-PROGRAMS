@@ -1,0 +1,31 @@
+// 1. a) To find the largest of three numbers which are stored in 3 registers
+
+LDI R16, $17
+LDI R17, $20
+LDI R18, $19
+
+CP R16, R17
+BRGE L1
+MOV R16, R17
+
+L1: CP R16, R18
+BRGE L2
+MOV R16, R18
+L2: RJMP L2
+
+// 1. b) To swap two numbers stored in register using stack
+
+LDI R16, HIGH(RAMEND)
+OUT SPH, R16
+LDI R16, LOW(RAMEND)
+OUT SPL, R16
+
+LDI R17, $44
+LDI R18, $67
+
+PUSH R17
+PUSH R18
+POP R17
+POP R18
+
+LAST: RJMP LAST
