@@ -1,0 +1,39 @@
+// 4. To add N numbers stored stored in memory and send the result to PORTA.
+// Check whether the sum is odd or even. If odd display FF, else display 22.
+
+LDI XL, $40
+LDI XH, $01
+
+LDI R16, $0C
+ST X+, R16
+LDI R16, $21
+ST X+, R16
+LDI R16, $43
+ST X+, R16
+LDI R16, $23
+ST X+, R16
+LDI R16, $54
+ST X+, R16
+
+LDI XL, $40
+LDI XH, $01
+
+LDI R16, 5
+LDI R17, 0
+
+LOOP: LD R18, X+
+ADD R17, R18
+DEC R16
+BRNE LOOP
+
+LDI R16, $FF
+OUT DDRA, R16
+
+ROR R17
+BRCS ODD
+LDI R20, $22
+RJMP HERE
+ODD: LDI R20, $FF
+HERE:OUT PORTA, R20
+
+LAST: RJMP LAST
