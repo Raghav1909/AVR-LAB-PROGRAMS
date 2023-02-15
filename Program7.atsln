@@ -1,0 +1,20 @@
+// 7. Write a program to swap two adjacent bits and if 5th bit is 1, then add 2 to the result
+
+LDI R16, $99
+LDI R17, $AA
+
+AND R17, R16
+ROR R17
+
+LDI R18, $55
+AND R18, R16
+ROL R18
+
+OR R17, R18
+MOV R19, R17
+ANDI R17, $20
+BREQ LAST
+INC R19
+INC R19
+
+LAST: RJMP LAST
