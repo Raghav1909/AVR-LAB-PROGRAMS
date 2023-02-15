@@ -1,0 +1,40 @@
+// 2. To add or subtract two numbers based on the operator. 
+// Accept the operands and operator from PORTA, PORTB and PORTC
+// respectively. Send the results to PORTD.
+
+LDI R16, $FF
+OUT DDRA, R16
+OUT DDRB, R16
+OUT DDRC, R16
+OUT DDRD, R16
+
+LDI R16, $41
+LDI R17, $12
+LDI R18, '+'
+
+OUT PORTA, R16
+OUT PORTB, R17
+OUT PORTC, R18
+
+LDI R16, $00
+OUT DDRA, R16
+OUT DDRB, R16
+OUT DDRC, R16
+
+IN R16, PINA
+IN R17, PINB
+IN R18, PINC
+
+CPI R18, '+'
+BREQ ADDITION
+CPI R18, '-'
+BREQ SUBTRACTION
+LDI R17, 'E'
+RJMP RESULT
+
+ADDITION: ADD R17, R16
+RJMP RESULT
+
+SUBTRACTION: SUB R17, R17
+RESULT: OUT PORTD, R17
+LAST: RJMP LAST
