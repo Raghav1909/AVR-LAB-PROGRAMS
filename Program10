@@ -1,0 +1,42 @@
+// 10. Implement a program to display BCD counter with appropriate delay.
+// Store the count at memory starting from 0x200. Separate the odd BCD
+// numbers and store it starting from location 0x233.
+
+LDI R16, HIGH(RAMEND)
+OUT SPH, R16
+LDI R16, LOW(RAMEND)
+OUT SPL, R16
+
+LDI XL, $00
+LDI XH, $02
+
+LDI R17, 0
+
+L1: ST X+, R17
+CALL DELAY
+INC R17
+CPI R17, 10
+BRNE L1
+
+LDI R17, 10
+LDI XL, $00
+LDI XH, $02
+LDI YL, $23
+LDI YH, $02
+
+L2: LD R20, X+
+MOV R21, R20
+ROR R21
+BRCC L3
+ST Y+, R20
+L3: DEC R17
+BRNE L2
+
+LAST: RJMP LAST
+
+DELAY: LDI R16, $FF
+LOOP: NOP
+NOP
+DEC R16
+BRNE LOOP
+RET
