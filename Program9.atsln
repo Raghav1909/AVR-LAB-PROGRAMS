@@ -1,0 +1,28 @@
+// 9. To convert 2 digit hexadecimal data to decimal. Save the digits
+// at location 0x322, 0x323 and 0x324 where LSB location is 0x322.
+
+
+LDI R16, $FF
+LDI R20, 10
+
+LDI R18, 0
+L1: INC R18 
+SUB R16, R20
+BRCC L1
+DEC R18
+ADD R16, R20
+
+STS $322, R16
+MOV R16, R18
+
+LDI R18, 0
+L2: INC R18 
+SUB R16, R20
+BRCC L2
+DEC R18
+ADD R16, R20
+
+STS $323, R16
+STS $324, R18
+
+LAST: RJMP LAST
