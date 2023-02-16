@@ -1,0 +1,27 @@
+// 6. Write a program to count the number of zeros and first occurance of one.
+
+LDI R16, $23
+MOV R20, R16
+LDI R17, 8
+LDI R18, 0
+
+TOP: ROR R20
+BRCS L1
+INC R18
+L1: DEC R17
+BRNE TOP
+
+LDI R17, 8
+LDI R19, 1
+MOV R20, R16
+
+CPI R20, 0
+BREQ L2
+
+LOOP: ROR R20
+BRCS L2
+INC R19
+RJMP LOOP
+L2: MUL R19, R18
+
+LAST: RJMP LAST
